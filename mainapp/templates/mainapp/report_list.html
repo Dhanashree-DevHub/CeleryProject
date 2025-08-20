@@ -1,0 +1,17 @@
+{% extends "mainapp/report_base.html" %}
+
+{% block content %}
+    <h1>Reports</h1>
+    <a href="{% url 'report_create' %}">Create a repost </a>
+    {% if resport.exists  %}
+    <ul>
+        {% for report in report %}
+            <li>
+                <a href="{% url 'mainapp/report_detail' report.pk %}">{{ report.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>No reports available.</p>
+    {% endif %}
+{% endblock %}
