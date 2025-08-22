@@ -22,6 +22,8 @@ from mainapp.views import (
     ReportCreateView,
     ReportDetailView,
     ReportListView,
+    FeedbackFormView,
+    ThanksView,
 )
 
 urlpatterns = [
@@ -31,4 +33,6 @@ urlpatterns = [
     path("report", ReportListView.as_view(), name="report_list"),
     path("report/create", ReportCreateView.as_view(), name="report_create"),
     path("report/detail/<int:pk>", ReportDetailView.as_view(), name="report_detail"),
+    path("feedback/", FeedbackFormView.as_view(), name="feedback_form"),
+    path("thanks/", ThanksView.as_view(), name="thanks"),
 ]
