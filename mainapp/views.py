@@ -6,6 +6,9 @@ from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.urls import reverse  # Add this line
 from .models import Report
+from mainapp.forms import FeedbackForm
+from django.views.generic.edit import FormView
+from django.views.generic.base import TemplateView
 def index(request):
     return render(request, 'mainapp/index.html')
 
@@ -36,3 +39,16 @@ class ReportListView(ListView):
     context_object_name = "reports"
     ordering = ["-dt_created"]
     paginate_by = 10
+    
+    
+class FeedbackFormView(FormView):
+    template_name = "mainapp/feedback_form.html"
+    form_class = FeedbackForm
+    success_url = "/thanks/"
+
+    def form_valid(self, form):
+        form.send_email()
+        return super().form_valid(form)
+    
+class ThanksView(TemplateView):
+    template_name = "mainapp/thanks.html"
